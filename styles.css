@@ -1,16 +1,24 @@
 @import url("https://fonts.googleapis.com/css?family=Inter:400,500,700,900&display=swap");
 
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 main {
-  width: 1280px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   position: relative;
 }
 
+
 #webar {
-  width: 1280px;
-  height: 720px;
+  width: 100%;
+  height: 100%;
   background-color: #000000;
 }
 
@@ -674,4 +682,27 @@ input[name="effect"]:checked + .effect-icon__border {
   100% {
     transform: rotate(360deg);
   }
+}
+
+@media screen and (max-width: 768px) {
+
+  #webar {
+    height: auto; /* Adjust height as needed for smaller screens */
+  }
+
+  canvas {
+    width: 100%;
+    height: 100vh; /* Full height for smaller screens */
+  }
+
+  #fps {
+    width: 100%; /* Full width for smaller screens */
+    left: 0; /* Align to the left for smaller screens */
+  }
+
+  #reset-button {
+    left: 20px; /* Adjust the left position as needed for smaller screens */
+  }
+
+  /* Add more adjustments for other elements as needed */
 }
