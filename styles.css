@@ -5,6 +5,7 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow-y: hidden;
 }
 
 main {
@@ -702,15 +703,15 @@ input[name="effect"]:checked + .effect-icon__border {
   }
 
   #reset-button {
-    bottom: 70px;
-    left: 391px; /* Adjust the left position as needed for smaller screens */
+    bottom: 182px;
+    left: 333px;
   }
 
   .categories {
-    
+    font-size: 11px;
     position: absolute;
-    bottom: 78px;
-    right: 277px;
+    bottom: 140px;
+    right: 153px;
     width: 152px;
     display: flex;
     justify-content: space-between;
@@ -719,16 +720,17 @@ input[name="effect"]:checked + .effect-icon__border {
 }
 .effects {
  
-  bottom: 147px;
+  bottom: 197px;
  
 }
 .technologies{
   position: absolute;
-  bottom: 11px;
-  right: 291px;
-  width: 152px;
+  bottom: 104px;
+  right: 314px;
+  width: 75px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   z-index: 1;
 }
 .technology {
@@ -740,8 +742,8 @@ input[name="effect"]:checked + .effect-icon__border {
 }
 .controls {
   position: absolute;
-  bottom: 22px;
-  right: 23px;
+  bottom: 103px;
+  right: 40px;
   width: 152px;
   display: flex;
   justify-content: space-between;
