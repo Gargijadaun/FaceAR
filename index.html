@@ -6,11 +6,15 @@
    
     <title>FaceFilter WebAR</title>
     <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-   
+    <script src="./pure-snow.js" defer></script>
+</head>
+<body>
+  
     <main>
+
+       
       <div class="start-screen">
+
         <div class="start-screen__spinner">
           <div></div>
           <div></div>
@@ -76,7 +80,7 @@
       <div id="webar">
        
       </div>
-     
+     <div id="snow" data-count="200"></div>
       <div id="fps">
         Webcam FPS: <span id="cam"></span><br />
         Processing FPS: <span id="processing"></span><br />
@@ -141,7 +145,15 @@
   </body>
   <script src="BanubaClientToken.js"></script>
   <script type="module" src="main.js"></script>
- 
+  <script>
+    // Snowfall initialization
+    const snowContainer = document.getElementById('webar');
 
+    for (let i = 0; i < snowContainer.dataset.count; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowContainer.appendChild(snowflake);
+    }
+</script>
 
 </html>
