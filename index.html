@@ -3,10 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Banuba SDK Web AR demo</title>
+   
+    <title>FaceFilter WebAR</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+   
     <main>
       <div class="start-screen">
         <div class="start-screen__spinner">
@@ -32,7 +34,7 @@
           <div class="start-screen__image"></div>
         </div>
       </div>
-
+     
       <div class="hand-gestures-tip hidden">
         <div class="hand-gestures-tip__inner">
           <div class="hand-gestures-tip__title">Tip</div>
@@ -71,7 +73,10 @@
       <div class="test-ruler hidden"></div>
       <div id="popups" class="popups"></div>
       <div class="overlay"></div>
-      <div id="webar"></div>
+      <div id="webar">
+       
+      </div>
+     
       <div id="fps">
         Webcam FPS: <span id="cam"></span><br />
         Processing FPS: <span id="processing"></span><br />
@@ -84,7 +89,8 @@
         alt="reset button"
         disabled
       />
-
+      <div class="categories"></div>
+      <div class="technologies"></div>
       <div class="controls">
         <div id="rec-duration" class="hidden"></div>
         <input
@@ -128,11 +134,14 @@
             <img src="assets/icons/controls/icon-arrow.svg" alt="right" />
           </div>
         </div>
-        <div class="categories"></div>
-        <div class="technologies"></div>
+       
+       
       </div>
     </main>
   </body>
   <script src="BanubaClientToken.js"></script>
   <script type="module" src="main.js"></script>
+ 
+
+
 </html>
