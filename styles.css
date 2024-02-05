@@ -5,7 +5,6 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-<<<<<<< HEAD
 }
 .overlay {
   position: fixed;
@@ -42,8 +41,6 @@ body, html {
 
 .overlay button:hover {
   background-color: #45a049; /* Darker green on hover */
-=======
->>>>>>> 16cf5a99ae658bb8272be9fd9357589729e6a743
 }
 
 main {
@@ -227,18 +224,11 @@ canvas {
 }
 
 .technologies {
-<<<<<<< HEAD
   
     /* display: flex; */
     /* justify-content: space-between; */
     height: -5px;
     margin: -4px 3px;
-=======
-  /* display: flex; */
-  /* justify-content: space-between; */
-  height: -5px;
-  margin: 46px 55px;
->>>>>>> 16cf5a99ae658bb8272be9fd9357589729e6a743
 }
 
 .technology {
@@ -363,11 +353,7 @@ input[name="category"]:checked + label {
 }
 .effects {
   position: absolute;
-<<<<<<< HEAD
   bottom: -42px;
-=======
-  bottom: 54px;
->>>>>>> 16cf5a99ae658bb8272be9fd9357589729e6a743
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -752,11 +738,7 @@ input[name="effect"]:checked + .effect-icon__border {
 
   canvas {
     width: 100%;
-<<<<<<< HEAD
     height: 83vh; /* Full height for smaller screens */
-=======
-    height: 88vh; /* Full height for smaller screens */
->>>>>>> 16cf5a99ae658bb8272be9fd9357589729e6a743
   }
 
   #fps {

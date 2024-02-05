@@ -30,16 +30,8 @@ const onScreenshotButtonClick = async (e) => {
     screenshotButton.src = "assets/icons/controls/capture.png";
   } else {
     screenshotButton.src = "assets/icons/controls/capture.png";
-<<<<<<< HEAD
     const screenshotBlob = await getScreenshot();
     const url = URL.createObjectURL(screenshotBlob);
-=======
-    const url = URL.createObjectURL(await getScreenshot());
-    const popup = document.createElement("div");
-    popup.classList.add("popup", "popup__hidden");
-    popup.innerHTML = `<span class="popup__bold">Screenshot is ready</span> Check the <span id="screenshot-link"><a href="${url}" target="_blank">link</a></span>`;
-    popups.prepend(popup);
->>>>>>> 16cf5a99ae658bb8272be9fd9357589729e6a743
 
     // Create an overlay element
     const overlay = document.createElement("div");
