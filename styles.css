@@ -5,18 +5,42 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow-y: hidden;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url('./Photo_frame.png') center/cover no-repeat;
+  backdrop-filter: blur(3px);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+.overlay img {
+  max-width: 80%; /* Adjust the size of the image as needed */
+  max-height: 80%; /* Adjust the size of the image as needed */
+  margin-bottom: 20px; /* Adjust the spacing between image and buttons */
+}
 
-.snowflake {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: linear-gradient(white, white);
-  /* Workaround for Chromium's selective color inversion */
-  border-radius: 50%;
-  filter: drop-shadow(0 0 10px white);
+.overlay button {
+  margin: 5px;
+  padding: 10px;
+  background-color: #4CAF50; /* Green background color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background-color: #45a049; /* Darker green on hover */
 }
 
 main {
@@ -27,6 +51,16 @@ main {
   position: relative;
 }
 
+#back {
+  width: 8%;
+position: fixed;
+top: 3%;
+left: 12%;
+transform: translate(-50%, -50%);
+max-width: 100%;
+height: auto;
+z-index: 2;
+}
 
 #webar {
   width: 100%;
@@ -102,8 +136,8 @@ canvas {
 
 .controls {
   position: absolute;
-  bottom: 142px;
-  right: 40px;
+  bottom: 150px;
+  right: 85px;
   width: 152px;
   display: flex;
   justify-content: space-between;
@@ -133,7 +167,7 @@ canvas {
   flex-shrink: 0;
   border-radius: 20px;
   background: #fff;
-  top: calc(50% - -143px);
+  top: calc(270% - 115px);
   left: calc(50% - 175px);
   text-align: center;
   position: absolute;
@@ -189,19 +223,20 @@ canvas {
   overflow: hidden;
 }
 
-/* .technologies {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  margin: 0 55px;
-} */
+.technologies {
+  
+    /* display: flex; */
+    /* justify-content: space-between; */
+    height: -5px;
+    margin: -4px 3px;
+}
 
-/* .technology {
+.technology {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   text-align: center;
-} */
+}
 
 input[type="radio"] {
   display: none;
@@ -238,7 +273,7 @@ input[name="tech"]:checked + label:after {
 
 .categories {
   font-size: 13px;
-  display: flex;
+  display: none;
   height: 40px;
   justify-content: center;
   margin-top: 16px;
@@ -316,10 +351,9 @@ input[name="category"]:checked + label {
   border: 1px solid #191428;
   cursor: default;
 }
-
 .effects {
   position: absolute;
-  bottom: 134px;
+  bottom: -42px;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -330,10 +364,10 @@ input[name="category"]:checked + label {
 
 .effects-list {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  /*width: 848px;*/
-  /*margin-left: 80px;*/
+  justify-content: flex-start; /* Adjust as needed */
+  width: 100%; /* Set to 100% to ensure it takes the full width of the container */
+  max-height: 240px; /* Adjust the height based on the number of effect items */
+  overflow-y: auto; /* Add vertical scrolling */
 }
 
 .effect-icon {
@@ -696,7 +730,7 @@ input[name="effect"]:checked + .effect-icon__border {
   }
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 768px) {
 
   #webar {
     height: auto; /* Adjust height as needed for smaller screens */
@@ -704,7 +738,7 @@ input[name="effect"]:checked + .effect-icon__border {
 
   canvas {
     width: 100%;
-    height: 100vh; /* Full height for smaller screens */
+    height: 83vh; /* Full height for smaller screens */
   }
 
   #fps {
@@ -714,50 +748,8 @@ input[name="effect"]:checked + .effect-icon__border {
   }
 
   #reset-button {
-    bottom: 182px;
-    left: 333px;
+    left: 20px; /* Adjust the left position as needed for smaller screens */
   }
 
-  .categories {
-    font-size: 11px;
-    position: absolute;
-    bottom: 140px;
-    right: 153px;
-    width: 152px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 1;
-   
-}
-.effects {
- 
-  bottom: 197px;
- 
-}
-.technologies{
-  position: absolute;
-  bottom: 104px;
-  right: 314px;
-  width: 75px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  z-index: 1;
-}
-.technology {
-  z-index: 10;
-
-  align-items: center;
-  flex-wrap: nowrap;
-  text-align: center;
-}
-.controls {
-  position: absolute;
-  bottom: 103px;
-  right: 40px;
-  width: 152px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 1;
-}
+  /* Add more adjustments for other elements as needed */
 }
