@@ -28,9 +28,9 @@ const onMuteButtonClick = () => {
 
 const onScreenshotButtonClick = async (e) => {
   if (e.type === "mousedown") {
-    screenshotButton.src = "assets/icons/controls/icon-screenshot-active.svg";
+    screenshotButton.src = "assets/icons/controls/capture.png";
   } else {
-    screenshotButton.src = "assets/icons/controls/icon-screenshot.svg";
+    screenshotButton.src = "assets/icons/controls/capture.png";
     const url = URL.createObjectURL(await getScreenshot());
     const popup = document.createElement("div");
     popup.classList.add("popup", "popup__hidden");
@@ -100,7 +100,7 @@ const onRecButtonClick = async () => {
   isRecording = 1 - isRecording;
 };
 
-muteButton.addEventListener("click", onMuteButtonClick);
+// muteButton.addEventListener("click", onMuteButtonClick);
 screenshotButton.addEventListener("mousedown", onScreenshotButtonClick);
 screenshotButton.addEventListener("mouseup", onScreenshotButtonClick);
-recButton.addEventListener("click", onRecButtonClick);
+// recButton.addEventListener("click", onRecButtonClick);

@@ -3,18 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-   
-    <title>FaceFilter WebAR</title>
+    <title>Banuba SDK Web AR demo</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="./pure-snow.js" defer></script>
-</head>
-<body>
-  
+  </head>
+  <body>
+    <img src="./backyellow.png" alt="Back" id="back" onclick="redirectToPage('https://gargijadaun.github.io/SoulStoriesDemo/menu.html')">
     <main>
 
-       
       <div class="start-screen">
-
         <div class="start-screen__spinner">
           <div></div>
           <div></div>
@@ -38,7 +34,7 @@
           <div class="start-screen__image"></div>
         </div>
       </div>
-     
+
       <div class="hand-gestures-tip hidden">
         <div class="hand-gestures-tip__inner">
           <div class="hand-gestures-tip__title">Tip</div>
@@ -77,10 +73,7 @@
       <div class="test-ruler hidden"></div>
       <div id="popups" class="popups"></div>
       <div class="overlay"></div>
-      <div id="webar">
-       
-      </div>
-     <div id="snow" data-count="200"></div>
+      <div id="webar"></div>
       <div id="fps">
         Webcam FPS: <span id="cam"></span><br />
         Processing FPS: <span id="processing"></span><br />
@@ -93,28 +86,27 @@
         alt="reset button"
         disabled
       />
-      <div class="categories"></div>
-      <div class="technologies"></div>
+
       <div class="controls">
         <div id="rec-duration" class="hidden"></div>
-        <input
+        <!-- <input
           type="image"
           id="rec-button"
           src="assets/icons/controls/icon-record.svg"
           alt="rec-button"
-        />
+        /> -->
         <input
           type="image"
           id="screenshot-button"
-          src="assets/icons/controls/icon-screenshot.svg"
+          src="assets/icons/controls/capture.png"
           alt="screenshot-button"
         />
-        <input
+        <!-- <input
           type="image"
           id="mute-button"
           src="assets/icons/controls/icon-sound.svg"
           alt="mute-button"
-        />
+        /> -->
       </div>
       <div class="import-message hidden">
         <div class="import-message__inner">
@@ -125,9 +117,11 @@
       </div>
       <div class="footer">
         <div class="effects">
+         
           <div class="effect-control"></div>
           <div class="effects-list"></div>
         </div>
+        <div class="technologies"></div>
         <div class="categories-button__left hidden">
           <div class="categories-button__left-icon">
             <img src="assets/icons/controls/icon-arrow.svg" alt="left" />
@@ -138,22 +132,26 @@
             <img src="assets/icons/controls/icon-arrow.svg" alt="right" />
           </div>
         </div>
-       
-       
+        <div class="categories"></div>
+        
       </div>
     </main>
   </body>
+  
+  <script>
+        
+    function redirectToPage(page) {
+        // Check if the page starts with 'http://' or 'https://'
+        if (page.startsWith('http://') || page.startsWith('https://')) {
+            // If it's an external link, navigate to it in the same window
+            window.location.href = page;
+        } else {
+            // If it's an internal link, navigate to it
+            window.location.href = page;
+        }
+    }
+
+</script>
   <script src="BanubaClientToken.js"></script>
   <script type="module" src="main.js"></script>
-  <script>
-    // Snowfall initialization
-    const snowContainer = document.getElementById('webar');
-
-    for (let i = 0; i < snowContainer.dataset.count; i++) {
-      const snowflake = document.createElement('div');
-      snowflake.className = 'snowflake';
-      snowContainer.appendChild(snowflake);
-    }
-</script>
-
 </html>

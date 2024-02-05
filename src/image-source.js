@@ -30,5 +30,17 @@ const onImageSelect = (e) => {
   onSourceSelect();
 };
 
+// Function to automatically select the webcam when the page loads
+const autoSelectWebcam = () => {
+  const source = getSource(webcamSourceButton.value);
+  startPlayer(source);
+  onSourceSelect();
+};
+
+// Trigger click event on webcamSourceButton when the page loads
+window.addEventListener('load', () => {
+  webcamSourceButton.click();
+});
+
 webcamSourceButton.addEventListener("click", onWebcamSelect);
 imageSourceButton.addEventListener("change", onImageSelect);
