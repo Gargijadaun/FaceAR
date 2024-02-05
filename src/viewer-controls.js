@@ -37,6 +37,12 @@ const onScreenshotButtonClick = async (e) => {
     const overlay = document.createElement("div");
     overlay.classList.add("overlay");
 
+    // Create a new div for the background image
+    const backgroundImageDiv = document.createElement("div");
+    backgroundImageDiv.style.backgroundImage = 'url("Photo_frame.png")'; // Set the path to your background image
+    backgroundImageDiv.classList.add("background-image");
+    overlay.appendChild(backgroundImageDiv);
+
     // Append the screenshot image to the overlay
     const screenshotImage = document.createElement("img");
     screenshotImage.src = url;
@@ -59,8 +65,9 @@ const onScreenshotButtonClick = async (e) => {
     const shareButton = document.createElement("button");
     shareButton.textContent = "Share";
     shareButton.addEventListener("click", () => {
+      
       if (navigator.share) {
-        console.log('Sharing URL:', url); // Log the URL for debugging
+        console.log('Sharing URL:', url);
         navigator.share({
           title: "Screenshot",
           text: "Check out this screenshot!",
@@ -69,7 +76,6 @@ const onScreenshotButtonClick = async (e) => {
           .then(() => console.log('Shared successfully'))
           .catch((error) => console.error('Error sharing:', error));
       } else {
-        // Fallback if Web Share API is not supported
         alert("Web Share API is not supported in your browser.");
       }
     });
