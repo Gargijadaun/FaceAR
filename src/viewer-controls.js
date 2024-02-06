@@ -33,7 +33,7 @@ const onScreenshotButtonClick = async (e) => {
     screenshotButton.src = "assets/icons/controls/capture.png";
     const screenshotBlob = await getScreenshot();
     const url = URL.createObjectURL(screenshotBlob);
-
+    screenshotButton.style.display = "none";
     // Create or retrieve the existing overlay
     let overlay = document.getElementById("overlay");
     if (!overlay) {
@@ -42,15 +42,25 @@ const onScreenshotButtonClick = async (e) => {
       overlay.id = "overlay";
       overlay.style.display = "none";
       overlay.style.position = "fixed"; // Fixed position to overlay the entire screen
-      overlay.style.top = "44px";
-      overlay.style.left = "-58px";
-      overlay.style.width = "116vw";
-      overlay.style.height = "68vh";
-      overlay.style.backgroundImage = 'url("Photo_frame.png")'; // Set the path to your background image
-      overlay.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
-      overlay.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+      overlay.style.top = "0";
+      overlay.style.left = "0";
+      overlay.style.width = "100vw";
+      overlay.style.height = "100vh";
       document.body.appendChild(overlay);
-      screenshotButton.style.display = "none";
+
+      // Create a background div
+      const backgroundDiv = document.createElement("div");
+      backgroundDiv.style.position = "absolute";
+      backgroundDiv.style.top = "0";
+      backgroundDiv.style.left = "0";
+      backgroundDiv.style.width = "100%";
+      backgroundDiv.style.height = "100%";
+      backgroundDiv.style.backgroundImage = 'url("Photo_frame.png")';
+      backgroundDiv.style.backgroundSize = "cover";
+      backgroundDiv.style.backgroundRepeat = "no-repeat";
+      overlay.appendChild(backgroundDiv);
+
+      // screenshotButton.style.display = "none";
     }
 
     // Clear the overlay content
@@ -62,27 +72,93 @@ const onScreenshotButtonClick = async (e) => {
     screenshotImage.id = "photo";
     screenshotImage.style.position = "absolute"; // Position absolute for custom positioning
     screenshotImage.style.top = "15%"; // Adjust the top position as needed
-    screenshotImage.style.left = "16%"; // Adjust the left position as needed
-    screenshotImage.style.width = "83%";
-    screenshotImage.style.height = "72%";
+    screenshotImage.style.left = "10%"; // Adjust the left position as needed
+    screenshotImage.style.width = "77%";
+    screenshotImage.style.height = "62%";
     overlay.appendChild(screenshotImage);
 
     // Add a download button to the overlay
-    const downloadButton = createButton("download.png", "11%", "10%", "36%", "95%");
+    const downloadButton = document.createElement("button");
+    downloadButton.style.border = "none";
+    downloadButton.style.background = "transparent";
+    downloadButton.style.position = "absolute";
+    downloadButton.style.width = "11%";
+    downloadButton.style.height = "6%";
+    downloadButton.style.top = "79%";
+    downloadButton.style.left = "31%";
+    downloadButton.style.backgroundImage = 'url("download.png")'; // Set the path to your background image
+    downloadButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    downloadButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
     downloadButton.addEventListener("click", () => {
-      captureVisibleArea(screenshotImage, "screenshot.png");
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const context = canvas.getContext("2d");
+      context.drawImage(screenshotImage, 0, 0, 1080, 1920);
+      const dataUrl = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = "screenshot.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     });
     overlay.appendChild(downloadButton);
 
     // Add a share button to the overlay
-    const shareButton = createButton("sharebtn.png", "11%", "10%", "21%", "95%");
-    shareButton.addEventListener("click", () => {
-      // Add your share logic here
-    });
+    const shareButton = document.createElement("button");
+    shareButton.style.border = "none";
+    shareButton.style.background = "transparent";
+    shareButton.style.position = "absolute";
+    shareButton.style.width = "11%";
+    shareButton.style.height = "6%";
+    shareButton.style.top = "79%";
+    shareButton.style.left = "17%";
+    shareButton.style.backgroundImage = 'url("sharebtn.png")'; // Set the path to your background image
+    shareButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    shareButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+    shareButton.addEventListener("click", async () => {
+      try {
+          // Check if the Web Share API is supported
+          if (navigator.share) {
+              const canvas = document.createElement("canvas");
+              canvas.width = 1080;
+              canvas.height = 1920;
+              const context = canvas.getContext("2d");
+              context.drawImage(screenshotImage, 0, 0, 1080, 1920);
+  
+              // Convert canvas to blob
+              canvas.toBlob(async (blob) => {
+                  const shareData = {
+                      title: "Check out my screenshot!",
+                      files: [new File([blob], "screenshot.png", { type: "image/png" })],
+                  };
+  
+                  // Use the Web Share API to share the image
+                  await navigator.share(shareData);
+              }, "image/png");
+          } else {
+              // Web Share API not supported, provide fallback or inform the user
+              console.log("Web Share API not supported");
+          }
+      } catch (error) {
+          console.error("Error sharing screenshot:", error);
+      }
+  });
     overlay.appendChild(shareButton);
 
     // Add a close button to the overlay
-    const closeButton = createButton("closebtn.png", "8%", "7%", "21%", "8%");
+    const closeButton = document.createElement("button");
+    closeButton.style.border = "none";
+    closeButton.style.background = "transparent";
+    closeButton.style.position = "absolute";
+    closeButton.style.width = "11%";
+    closeButton.style.height = "6%";
+    closeButton.style.top = "8%";
+    closeButton.style.left = "17%";
+    closeButton.style.backgroundImage = 'url("closebtn.png")'; // Set the path to your background image
+    closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    closeButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
     closeButton.addEventListener("click", () => {
       screenshotButton.style.display = "block";
       overlay.style.display = "none";
@@ -93,62 +169,6 @@ const onScreenshotButtonClick = async (e) => {
     overlay.style.display = "block";
   }
 };
-
-// Helper function to create button elements
-const createButton = (bgImage, width, height, left, top) => {
-  const button = document.createElement("button");
-  button.style.border = "none";
-  button.style.background = "transparent";
-  button.style.position = "absolute";
-  button.style.width = width;
-  button.style.height = height;
-  button.style.top = top;
-  button.style.left = left;
-  button.style.backgroundImage = `url(${bgImage})`;
-  button.style.backgroundSize = "cover";
-  button.style.backgroundRepeat = "no-repeat";
-  return button;
-};
-
-// Helper function to capture the visible area of the image
-// Helper function to capture the visible area of the image
-// Helper function to capture the visible area of the image
-const captureVisibleArea = (image, fileName) => {
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-
-  // Set canvas dimensions based on the visible area of the image
-  let visibleWidth, visibleHeight;
-
-  // Check if it's on a phone
-  if (window.innerWidth <= 768) {
-    visibleWidth = image.width * 0.9;  // Adjust as needed for phone
-    visibleHeight = image.height * 0.8;  // Adjust as needed for phone
-  } else {
-    visibleWidth = image.width * 0.83;  // Adjust as needed for other devices
-    visibleHeight = image.height * 0.72;  // Adjust as needed for other devices
-  }
-
-  canvas.width = visibleWidth;
-  canvas.height = visibleHeight;
-
-  // Calculate the centering offsets to maintain the aspect ratio
-  const offsetX = (image.width - visibleWidth) / 2;
-  const offsetY = (image.height - visibleHeight) / 2;
-
-  // Draw the visible area of the image onto the canvas
-  context.drawImage(image, offsetX, offsetY, visibleWidth, visibleHeight, 0, 0, canvas.width, canvas.height);
-
-  // Convert the canvas content to a data URL and trigger download
-  const dataUrl = canvas.toDataURL("image/png");
-  const a = document.createElement("a");
-  a.href = dataUrl;
-  a.download = fileName;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-};
-
 
 
 const onRecButtonClick = async () => {

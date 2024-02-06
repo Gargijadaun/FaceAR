@@ -164,8 +164,19 @@ export const getPlayer = () => {
 };
 
 export const startPlayer = (source) => {
-  player.use(source, { resize, crop });
-  Dom.render(player, "#webar");
+  // Get the device width and height
+  const deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  const deviceHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+  // Calculate the aspect ratio of the device screen
+  const aspectRatio = deviceWidth / deviceHeight;
+
+  // Use the device width and height for resizing, and set the aspect ratio
+  player.use(source, { resize: (frameWidth, frameHeight) => resize(deviceWidth, deviceHeight), crop: null, aspectRatio });
+
+  // Render the player to take full width and size
+  Dom.render(player, "#webar", { width: deviceWidth, height: deviceHeight });
+
   startFpsTracking();
 };
 

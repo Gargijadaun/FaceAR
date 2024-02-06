@@ -43,6 +43,7 @@ body, html {
 
 
 main {
+ 
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -62,6 +63,7 @@ z-index: 2;
 }
 
 #webar {
+  
   width: 100%;
   height: 100%;
   background-color: #000000;
@@ -94,6 +96,7 @@ canvas {
 }
 
 #reset-button {
+  display: none;
   position: absolute;
   bottom: 142px;
   left: 40px;
@@ -135,7 +138,7 @@ canvas {
 
 .controls {
   position: absolute;
-  bottom: 150px;
+  bottom: 87px;
   right: 85px;
   width: 152px;
   display: flex;
@@ -166,7 +169,7 @@ canvas {
   flex-shrink: 0;
   border-radius: 20px;
   background: #fff;
-  top: calc(270% - 115px);
+  top: calc(50% - 115px);
   left: calc(50% - 175px);
   text-align: center;
   position: absolute;
@@ -352,7 +355,7 @@ input[name="category"]:checked + label {
 }
 .effects {
   position: absolute;
-  bottom: -42px;
+  bottom: 0px;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -729,26 +732,17 @@ input[name="effect"]:checked + .effect-icon__border {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) and (orientation: portrait) {
 
-  #webar {
-    height: auto; /* Adjust height as needed for smaller screens */
+ 
+  main {
+    height: 100%;
   }
-
-  canvas {
-    width: 100%;
-    height: 83vh; /* Full height for smaller screens */
-  }
-
   #fps {
     display: none;
-    width: 100%; /* Full width for smaller screens */
-    left: 0; /* Align to the left for smaller screens */
+   
   }
 
-  #reset-button {
-    left: 20px; /* Adjust the left position as needed for smaller screens */
-  }
-
+ 
   /* Add more adjustments for other elements as needed */
 }
