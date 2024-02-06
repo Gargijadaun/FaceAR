@@ -146,20 +146,13 @@ shareButton.style.backgroundRepeat = "no-repeat";
 shareButton.addEventListener("click", async () => {
   try {
     if (navigator.share) {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1080; // Change this to the desired width for sharing
-      canvas.height = 1920; // Change this to the desired height for sharing
-      const context = canvas.getContext("2d");
-      context.drawImage(screenshotImage, 0, 0, 1080, 1920);
+      const shareData = {
+        title: "Check out my screenshot!",
+        text: "This is an amazing screenshot!",
+        url: screenshotImage.src,
+      };
 
-      canvas.toBlob(async (blob) => {
-        const shareData = {
-          title: "Check out my screenshot!",
-          files: [new File([blob], "screenshot.png", { type: "image/png" })],
-        };
-
-        await navigator.share(shareData);
-      }, "image/png");
+      await navigator.share(shareData);
     } else {
       console.log("Web Share API not supported");
     }
