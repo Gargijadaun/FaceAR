@@ -34,6 +34,7 @@ const onScreenshotButtonClick = async (e) => {
     const screenshotBlob = await getScreenshot();
     const url = URL.createObjectURL(screenshotBlob);
     screenshotButton.style.display = "none";
+
     // Create or retrieve the existing overlay
     let overlay = document.getElementById("overlay");
     if (!overlay) {
@@ -46,6 +47,9 @@ const onScreenshotButtonClick = async (e) => {
       overlay.style.left = "0";
       overlay.style.width = "100vw";
       overlay.style.height = "100vh";
+      overlay.style.backgroundImage = 'url("Photo_frame.png")';
+      overlay.style.backgroundSize = "cover";
+      overlay.style.backgroundRepeat = "no-repeat";
       document.body.appendChild(overlay);
 
       // Create a background div
@@ -59,8 +63,6 @@ const onScreenshotButtonClick = async (e) => {
       backgroundDiv.style.backgroundSize = "cover";
       backgroundDiv.style.backgroundRepeat = "no-repeat";
       overlay.appendChild(backgroundDiv);
-
-      // screenshotButton.style.display = "none";
     }
 
     // Clear the overlay content
@@ -70,9 +72,21 @@ const onScreenshotButtonClick = async (e) => {
     const screenshotImage = document.createElement("img");
     screenshotImage.src = url;
     screenshotImage.id = "photo";
-    screenshotImage.style.position = "absolute"; // Position absolute for custom positioning
-    screenshotImage.style.top = "15%"; // Adjust the top position as needed
-    screenshotImage.style.left = "10%"; // Adjust the left position as needed
+
+    // Use the actual size of the camera view for the screenshot canvas
+    const cameraViewWidth = screenshotImage.width;
+    const cameraViewHeight = screenshotImage.height;
+    const screenshotCanvas = document.createElement("canvas");
+    screenshotCanvas.width = cameraViewWidth;
+    screenshotCanvas.height = cameraViewHeight;
+    const screenshotContext = screenshotCanvas.getContext("2d");
+    screenshotContext.drawImage(screenshotImage, 0, 0, cameraViewWidth, cameraViewHeight);
+    const screenshotDataUrl = screenshotCanvas.toDataURL("image/png");
+
+    // Set the position and size of the screenshot image in the overlay as needed
+    screenshotImage.style.position = "absolute";
+    screenshotImage.style.top = "15%";
+    screenshotImage.style.left = "10%";
     screenshotImage.style.width = "77%";
     screenshotImage.style.height = "62%";
     overlay.appendChild(screenshotImage);
