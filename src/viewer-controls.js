@@ -25,6 +25,7 @@ const onMuteButtonClick = () => {
   isSoundOn = 1 - isSoundOn;
   muteToggle(isSoundOn);
 };
+
 const onScreenshotButtonClick = async (e) => {
   if (e.type === "mousedown") {
     screenshotButton.src = "assets/icons/controls/capture.png";
@@ -33,27 +34,60 @@ const onScreenshotButtonClick = async (e) => {
     const screenshotBlob = await getScreenshot();
     const url = URL.createObjectURL(screenshotBlob);
 
-    // Create an overlay element
-    const overlay = document.createElement("div");
-    overlay.classList.add("overlay");
+    // Create or retrieve the existing overlay
+    let overlay = document.getElementById("overlay");
+    if (!overlay) {
+      // Create an overlay element
+      overlay = document.createElement("div");
+      overlay.id = "overlay";
+      overlay.style.display = "none";
+      overlay.style.position = "fixed"; // Fixed position to overlay the entire screen
+      overlay.style.top = "44px";
+      overlay.style.left = "-58px";
+      overlay.style.width = "116vw";
+      overlay.style.height = "68vh";
+      overlay.style.backgroundImage = 'url("Photo_frame.png")'; // Set the path to your background image
+      overlay.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+      overlay.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+      document.body.appendChild(overlay);
+      screenshotButton.style.display = "none";
+    }
 
-    // Create a new div for the background image
-    const backgroundImageDiv = document.createElement("div");
-    backgroundImageDiv.style.backgroundImage = 'url("Photo_frame.png")'; // Set the path to your background image
-    backgroundImageDiv.classList.add("background-image");
-    overlay.appendChild(backgroundImageDiv);
+    // Clear the overlay content
+    overlay.innerHTML = "";
 
     // Append the screenshot image to the overlay
     const screenshotImage = document.createElement("img");
     screenshotImage.src = url;
+    screenshotImage.id = "photo";
+    screenshotImage.style.position = "absolute"; // Position absolute for custom positioning
+    screenshotImage.style.top = "15%"; // Adjust the top position as needed
+    screenshotImage.style.left = "16%"; // Adjust the left position as needed
+    screenshotImage.style.width = "83%";
+    screenshotImage.style.height = "72%";
     overlay.appendChild(screenshotImage);
 
     // Add a download button to the overlay
     const downloadButton = document.createElement("button");
-    downloadButton.textContent = "Download";
+    downloadButton.style.border = "none";
+    downloadButton.style.background = "transparent";
+    downloadButton.style.position = "absolute";
+    downloadButton.style.width = "11%";
+    downloadButton.style.height = "10%";
+    downloadButton.style.top = "95%";
+    downloadButton.style.left = "36%";
+    downloadButton.style.backgroundImage = 'url("download.png")'; // Set the path to your background image
+    downloadButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    downloadButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
     downloadButton.addEventListener("click", () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const context = canvas.getContext("2d");
+      context.drawImage(screenshotImage, 0, 0, 1080, 1920);
+      const dataUrl = canvas.toDataURL("image/png");
       const a = document.createElement("a");
-      a.href = url;
+      a.href = dataUrl;
       a.download = "screenshot.png";
       document.body.appendChild(a);
       a.click();
@@ -63,46 +97,45 @@ const onScreenshotButtonClick = async (e) => {
 
     // Add a share button to the overlay
     const shareButton = document.createElement("button");
-    shareButton.textContent = "Share";
+    // shareButton.textContent = "Share";
+    shareButton.style.border = "none";
+    shareButton.style.background = "transparent";
+    shareButton.style.position = "absolute";
+    shareButton.style.width = "11%";
+    shareButton.style.height = "10%";
+    shareButton.style.top = "95%";
+    shareButton.style.left = "21%";
+    shareButton.style.backgroundImage = 'url("sharebtn.png")'; // Set the path to your background image
+    shareButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    shareButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
     shareButton.addEventListener("click", () => {
-      
-      if (navigator.share) {
-        console.log('Sharing URL:', url);
-        navigator.share({
-          title: "Screenshot",
-          text: "Check out this screenshot!",
-          url: url,
-        })
-          .then(() => console.log('Shared successfully'))
-          .catch((error) => console.error('Error sharing:', error));
-      } else {
-        alert("Web Share API is not supported in your browser.");
-      }
+      // Add your share logic here
     });
     overlay.appendChild(shareButton);
 
-    // Add the overlay to the document body
-    document.body.appendChild(overlay);
+    // Add a close button to the overlay
+    const closeButton = document.createElement("button");
+    closeButton.style.border = "none";
+    closeButton.style.background = "transparent";
+    closeButton.style.position = "absolute";
+    closeButton.style.width = "8%";
+    closeButton.style.height = "7%";
+    closeButton.style.top = "8%";
+    closeButton.style.left = "21%";
+    closeButton.style.backgroundImage = 'url("closebtn.png")'; // Set the path to your background image
+    closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    closeButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+    closeButton.addEventListener("click", () => {
+      screenshotButton.style.display = "block";
+      overlay.style.display = "none";
+    });
+    overlay.appendChild(closeButton);
 
-    // Close the overlay after a certain time
-    setTimeout(() => {
-      // overlay.remove();
-    }, 5000); // Adjust the time as needed
+    // Show the overlay
+    overlay.style.display = "block";
   }
 };
 
-const renderRecDuration = () => {
-  const str_pad_left = (string) => {
-    return (new Array(3).join("0") + string).slice(-2);
-  };
-
-  const minutes = Math.floor(recDuration / 60);
-  const seconds = recDuration - minutes * 60;
-
-  recDurationBlock.innerText =
-    str_pad_left(minutes) + ":" + str_pad_left(seconds);
-  recDuration += 1;
-};
 
 const onRecButtonClick = async () => {
   if (!!isRecording) {
