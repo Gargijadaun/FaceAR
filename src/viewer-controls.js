@@ -112,13 +112,22 @@ const createButton = (bgImage, width, height, left, top) => {
 
 // Helper function to capture the visible area of the image
 // Helper function to capture the visible area of the image
+// Helper function to capture the visible area of the image
 const captureVisibleArea = (image, fileName) => {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
   // Set canvas dimensions based on the visible area of the image
-  const visibleWidth = image.width * 0.83;  // Adjust as needed
-  const visibleHeight = image.height * 0.72;  // Adjust as needed
+  let visibleWidth, visibleHeight;
+
+  // Check if it's on a phone
+  if (window.innerWidth <= 768) {
+    visibleWidth = image.width * 0.9;  // Adjust as needed for phone
+    visibleHeight = image.height * 0.8;  // Adjust as needed for phone
+  } else {
+    visibleWidth = image.width * 0.83;  // Adjust as needed for other devices
+    visibleHeight = image.height * 0.72;  // Adjust as needed for other devices
+  }
 
   canvas.width = visibleWidth;
   canvas.height = visibleHeight;
@@ -138,8 +147,8 @@ const captureVisibleArea = (image, fileName) => {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-
 };
+
 
 
 const onRecButtonClick = async () => {
