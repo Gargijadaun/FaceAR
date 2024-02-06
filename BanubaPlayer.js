@@ -170,8 +170,8 @@ export const startPlayer = (source) => {
   // Calculate the aspect ratio of the device screen
   const aspectRatio = deviceWidth / deviceHeight;
 
-  // Calculate the desired height based on your requirements
-  const desiredHeight = deviceHeight - 100; // Adjust this value as needed
+  // Calculate the desired height based on your requirements (reduced by 2%)
+  const desiredHeight = deviceHeight; // Reduce height by 2%
 
   // Calculate the new width based on the aspect ratio and desired height
   const newWidth = aspectRatio * desiredHeight;
