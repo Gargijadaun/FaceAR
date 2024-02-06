@@ -167,20 +167,20 @@ export const startPlayer = (source) => {
   const deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   const deviceHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-  // Calculate the aspect ratio of the device screen
-  const aspectRatio = deviceWidth / deviceHeight;
+  // Assuming the camera feed has a different aspect ratio (e.g., 4:3)
+  const cameraAspectRatio = 4 / 3; // Update this value based on your camera feed's aspect ratio
 
-  // Calculate the desired height based on your requirements (reduced by 2%)
-  const desiredHeight = deviceHeight; // Reduce height by 2%
+  // Calculate the desired height based on your requirements
+  const desiredHeight = deviceHeight; 
 
   // Calculate the new width based on the aspect ratio and desired height
-  const newWidth = aspectRatio * desiredHeight;
+  const newWidth = cameraAspectRatio * desiredHeight;
 
   // Use the new width and desired height for resizing, and set the aspect ratio
   player.use(source, { 
     resize: (frameWidth, frameHeight) => resize(newWidth, desiredHeight), 
     crop: null, 
-    aspectRatio 
+    aspectRatio: cameraAspectRatio  // Use the camera's aspect ratio
   });
 
   // Render the player with the new dimensions
