@@ -172,7 +172,11 @@ export const startPlayer = (source) => {
   const aspectRatio = deviceWidth / deviceHeight;
 
   // Use the device width and height for resizing, and set the aspect ratio
-  player.use(source, { resize: (frameWidth, frameHeight) => resize(deviceWidth, deviceHeight), crop: null, aspectRatio });
+  player.use(source, { 
+    resize: (frameWidth, frameHeight) => resize(deviceWidth, deviceHeight), 
+    crop: null, 
+    aspectRatio 
+  });
 
   // Render the player to take full width and size
   Dom.render(player, "#webar", { width: deviceWidth, height: deviceHeight });

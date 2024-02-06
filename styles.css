@@ -222,7 +222,11 @@ canvas {
 }
 
 .footer {
-  overflow: hidden;
+
+     margin-top: -24%;
+    top: 10;
+    /* margin-bottom: -15%; */
+    overflow: hidden;
 }
 
 .technologies {
