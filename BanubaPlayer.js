@@ -167,24 +167,24 @@ export const startPlayer = (source) => {
   const deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   const deviceHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-  // Assuming the camera feed has a different aspect ratio (e.g., 4:3)
-  const cameraAspectRatio = 4 / 3; // Update this value based on your camera feed's aspect ratio
+  // Calculate the aspect ratio of the device screen
+  const aspectRatio = deviceWidth / deviceHeight;
 
-  // Calculate the desired height based on your requirements
-  const desiredHeight = deviceHeight; 
+  // Calculate the desired height based on your requirements (reduced by 2%)
+  const desiredHeight = deviceHeight * 0.98; // Reduce height by 2%
 
   // Calculate the new width based on the aspect ratio and desired height
-  const newWidth = cameraAspectRatio * desiredHeight;
+  const newWidth = aspectRatio * desiredHeight;
 
   // Use the new width and desired height for resizing, and set the aspect ratio
   player.use(source, { 
-    resize: (frameWidth, frameHeight) => resize(newWidth, desiredHeight), 
+    //resize: (frameWidth, frameHeight) => resize(deviceWidth, deviceHeight), 
     crop: null, 
-    aspectRatio: cameraAspectRatio  // Use the camera's aspect ratio
+    aspectRatio 
   });
 
   // Render the player with the new dimensions
-  Dom.render(player, "#webar", { width: newWidth, height: desiredHeight });
+  Dom.render(player, "#webar", { width: deviceWidth, height: deviceHeight });
 
   startFpsTracking();
 };
