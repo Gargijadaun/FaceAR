@@ -84,7 +84,7 @@ const onScreenshotButtonClick = async (e) => {
       canvas.width = 1080;
       canvas.height = 1920;
       const context = canvas.getContext("2d");
-      context.drawImage(screenshotImage, 0, 0, 1080, 1920);
+      context.drawImage(screenshotImage, 0, 0, 1080,1920);
       const dataUrl = canvas.toDataURL("image/png");
       const a = document.createElement("a");
       a.href = dataUrl;
