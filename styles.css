@@ -32,7 +32,7 @@ body, html {
 #shareButton {
   width: 76px;
   height: 38px;
-  top: 73%;
+  top: 78%;
   left: 41%;
     background: transparent;
     border: none;
@@ -45,7 +45,7 @@ body, html {
 #downloadButton {
   width: 76px;
   height: 38px;
-  top: 73%;
+  top: 78%;
   left: 21%;
     background: transparent;
     border: none;
@@ -202,7 +202,7 @@ canvas {
 .controls {
   position: absolute;
   bottom: 87px;
-  right: 85px;
+  right: 105px;
   width: 152px;
   display: flex;
   justify-content: space-between;

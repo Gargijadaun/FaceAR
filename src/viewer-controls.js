@@ -31,6 +31,7 @@ const onScreenshotButtonClick = async (e) => {
   let downloadButton = document.getElementById("downloadButton");
   let shareButton = document.getElementById("shareButton");
   let closeButton = document.getElementById("closeButton");
+  let Back = document.getElementById("back");
   if (e.type === "mousedown") {
     screenshotButton.src = "assets/icons/controls/capture.png";
   } else {
@@ -41,6 +42,7 @@ const onScreenshotButtonClick = async (e) => {
     downloadButton.style.display = "block";
     shareButton.style.display = "block";
     closeButton.style.display = "block";
+    Back.style.display = "none";
     // Create or retrieve the existing overlay
    
     if (!overlay) {
@@ -185,6 +187,10 @@ downloadButton.addEventListener("click", async () => {
     // closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
     // closeButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
     closeButton.addEventListener("click", () => {
+      downloadButton.style.display = "none";
+      shareButton.style.display = "none";
+      closeButton.style.display = "none";
+      Back.style.display = "block";
       screenshotButton.style.display = "block";
       overlay.style.display = "none";
     });
