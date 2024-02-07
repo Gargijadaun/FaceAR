@@ -75,7 +75,7 @@ screenshotImage.id = "photo";
 // Set the position and percentage-based size of the screenshot image in the overlay
 screenshotImage.style.position = "absolute";
 screenshotImage.style.top = "15%";
-screenshotImage.style.left = "10%";
+screenshotImage.style.left = "8%";
 screenshotImage.style.width = "80%";  // Use a percentage for width
 screenshotImage.style.height = "auto";  // Let the height adjust proportionally
 
@@ -169,7 +169,7 @@ overlay.appendChild(backgroundDiv);
     closeButton.style.position = "absolute";
     closeButton.style.width = "11%";
     closeButton.style.height = "7%";
-    closeButton.style.top = "8%";
+    closeButton.style.top = "-2%";
     closeButton.style.left = "87%";
     closeButton.style.backgroundImage = 'url("closebtn.png")'; // Set the path to your background image
     closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
