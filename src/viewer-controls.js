@@ -74,9 +74,9 @@ screenshotImage.id = "photo";
 
 // Set the position and percentage-based size of the screenshot image in the overlay
 screenshotImage.style.position = "fixed";
-screenshotImage.style.top = "29%";
+screenshotImage.style.top = "15%";
 screenshotImage.style.left = "17%";
-screenshotImage.style.width = "69%";  // Use a percentage for width
+screenshotImage.style.width = "75%";  // Use a percentage for width
 screenshotImage.style.height = "auto";  // Let the height adjust proportionally
 
 // Append the screenshot image to the overlay
