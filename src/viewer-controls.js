@@ -43,26 +43,26 @@ const onScreenshotButtonClick = async (e) => {
       overlay.id = "overlay";
       overlay.style.display = "none";
       overlay.style.position = "fixed"; // Fixed position to overlay the entire screen
-      overlay.style.top = "0";
-      overlay.style.left = "0";
-      overlay.style.width = "100vw";
-      overlay.style.height = "100vh";
-      overlay.style.backgroundImage = 'url("Photo_frame.png")';
-      overlay.style.backgroundSize = "cover";
-      overlay.style.backgroundRepeat = "no-repeat";
+      overlay.style.top = "73px";
+      overlay.style.left = "29px";
+      overlay.style.width = "86vw";
+      overlay.style.height = "66vh";
+      // overlay.style.backgroundImage = 'url("Photo_frame.png")';
+      // overlay.style.backgroundSize = "cover";
+      // overlay.style.backgroundRepeat = "no-repeat";
       document.body.appendChild(overlay);
 
       // Create a background div
-      const backgroundDiv = document.createElement("div");
-      backgroundDiv.style.position = "absolute";
-      backgroundDiv.style.top = "0";
-      backgroundDiv.style.left = "0";
-      backgroundDiv.style.width = "100%";
-      backgroundDiv.style.height = "100%";
-      backgroundDiv.style.backgroundImage = 'url("Photo_frame.png")';
-      backgroundDiv.style.backgroundSize = "cover";
-      backgroundDiv.style.backgroundRepeat = "no-repeat";
-      overlay.appendChild(backgroundDiv);
+      // const backgroundDiv = document.createElement("div");
+      // backgroundDiv.style.position = "absolute";
+      // backgroundDiv.style.top = "0";
+      // backgroundDiv.style.left = "0";
+      // backgroundDiv.style.width = "100%";
+      // backgroundDiv.style.height = "100%";
+      // backgroundDiv.style.backgroundImage = 'url("Photo_frame.png")';
+      // backgroundDiv.style.backgroundSize = "cover";
+      // backgroundDiv.style.backgroundRepeat = "no-repeat";
+      // overlay.appendChild(backgroundDiv);
     }
 
     // Clear the overlay content
@@ -81,15 +81,24 @@ screenshotImage.style.height = "auto";  // Let the height adjust proportionally
 
 // Append the screenshot image to the overlay
 overlay.appendChild(screenshotImage);
-
+const backgroundDiv = document.createElement("div");
+backgroundDiv.style.position = "absolute";
+backgroundDiv.style.top = "0";
+backgroundDiv.style.left = "-108px";
+backgroundDiv.style.width = "138%";
+backgroundDiv.style.height = "100%";
+backgroundDiv.style.backgroundImage = 'url("Photo_frame.png")';
+backgroundDiv.style.backgroundSize = "cover";
+backgroundDiv.style.backgroundRepeat = "no-repeat";
+overlay.appendChild(backgroundDiv);
     // Add a download button to the overlay
     const downloadButton = document.createElement("button");
     downloadButton.style.border = "none";
     downloadButton.style.background = "transparent";
     downloadButton.style.position = "absolute";
-    downloadButton.style.width = "10%";
-    downloadButton.style.height = "5%";
-    downloadButton.style.top = "79%";
+    downloadButton.style.width = "11%";
+    downloadButton.style.height = "7%";
+    downloadButton.style.top = "96%";
     downloadButton.style.left = "31%";
     downloadButton.style.backgroundImage = 'url("download.png")'; // Set the path to your background image
     downloadButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
@@ -99,8 +108,8 @@ overlay.appendChild(screenshotImage);
       canvas.width = screenshotImage.width;
       canvas.height = screenshotImage.height;
       const context = canvas.getContext("2d");
-      context.drawImage(screenshotDataUrl)
-    //  context.drawImage(screenshotImage, 0, 0, screenshotImage.width, screenshotImage.height);
+      //context.drawImage(url,0,0,url.width,url.he);
+     context.drawImage(screenshotImage, 0, 0, screenshotImage.width, screenshotImage.height);
       const dataUrl = canvas.toDataURL("image/png");
       const a = document.createElement("a");
       a.href = dataUrl;
@@ -116,9 +125,9 @@ overlay.appendChild(screenshotImage);
     shareButton.style.border = "none";
     shareButton.style.background = "transparent";
     shareButton.style.position = "absolute";
-    shareButton.style.width = "10%";
-    shareButton.style.height = "5%";
-    shareButton.style.top = "79%";
+    shareButton.style.width = "11%";
+    shareButton.style.height = "7%";
+    shareButton.style.top = "96%";
     shareButton.style.left = "11%";
     shareButton.style.backgroundImage = 'url("sharebtn.png")'; // Set the path to your background image
     shareButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
@@ -131,7 +140,7 @@ overlay.appendChild(screenshotImage);
               canvas.width = screenshotImage.width;
               canvas.height = screenshotImage.height;
               const context = canvas.getContext("2d");
-              context.drawImage(screenshotDataUrl);
+              context.drawImage(screenshotImage, 0, 0, screenshotImage.width, screenshotImage.height);
   
               // Convert canvas to blob
               canvas.toBlob(async (blob) => {
@@ -158,10 +167,10 @@ overlay.appendChild(screenshotImage);
     closeButton.style.border = "none";
     closeButton.style.background = "transparent";
     closeButton.style.position = "absolute";
-    closeButton.style.width = "14%";
+    closeButton.style.width = "11%";
     closeButton.style.height = "7%";
     closeButton.style.top = "8%";
-    closeButton.style.left = "10%";
+    closeButton.style.left = "87%";
     closeButton.style.backgroundImage = 'url("closebtn.png")'; // Set the path to your background image
     closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
     closeButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
