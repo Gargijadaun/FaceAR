@@ -68,90 +68,114 @@ const onScreenshotButtonClick = async (e) => {
     // Clear the overlay content
     overlay.innerHTML = "";
 
-    const screenshotImage = document.createElement("img");
+    // Load the image and wait for it to load
+    const screenshotImage = new Image();
     screenshotImage.src = url;
-    screenshotImage.id = "photo";
-    
-    // Set the position and percentage-based size of the screenshot image in the overlay
+    await new Promise((resolve) => {
+      screenshotImage.onload = resolve;
+    });
+
+    // Calculate the dimensions for displaying the image in the center
+    const screenAspectRatio = window.innerWidth / window.innerHeight;
+    const imageAspectRatio = screenshotImage.width / screenshotImage.height;
+    let displayWidth, displayHeight;
+
+    if (screenAspectRatio > imageAspectRatio) {
+      // Screen is wider, adjust height to fit
+      displayHeight = window.innerHeight * 0.7;
+      displayWidth = displayHeight * imageAspectRatio;
+    } else {
+      // Screen is taller, adjust width to fit
+      displayWidth = window.innerWidth * 0.7;
+      displayHeight = displayWidth / imageAspectRatio;
+    }
+
+    // Calculate the position for centering the image
+    const top = (window.innerHeight - displayHeight) / 2;
+    const left = (window.innerWidth - displayWidth) / 2;
+
+    // Set the position and size of the screenshot image in the overlay
     screenshotImage.style.position = "absolute";
-    screenshotImage.style.top = "15%";
-    screenshotImage.style.left = "10%";
-    screenshotImage.style.width = "80%";  // Use a percentage for width
-    screenshotImage.style.height = "auto";  // Let the height adjust proportionally
-    
-    // Append the screenshot image to the overlay
+    screenshotImage.style.top = `${top}px`;
+    screenshotImage.style.left = `${left}px`;
+    screenshotImage.style.width = `${displayWidth}px`;
+    screenshotImage.style.height = `${displayHeight}px`;
+
     overlay.appendChild(screenshotImage);
 
-    // Add a download button to the overlay
-    const downloadButton = document.createElement("button");
-    downloadButton.style.border = "none";
-    downloadButton.style.background = "transparent";
-    downloadButton.style.position = "absolute";
-    downloadButton.style.width = "10%";
-    downloadButton.style.height = "5%";
-    downloadButton.style.top = "79%";
-    downloadButton.style.left = "31%";
-    downloadButton.style.backgroundImage = 'url("download.png")'; // Set the path to your background image
-    downloadButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
-    downloadButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
-    downloadButton.addEventListener("click", () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = screenshotImage.width;
-      canvas.height = screenshotImage.height;
-      const context = canvas.getContext("2d");
-      context.drawImage(screenshotDataUrl)
-    //  context.drawImage(screenshotImage, 0, 0, screenshotImage.width, screenshotImage.height);
-      const dataUrl = canvas.toDataURL("image/png");
-      const a = document.createElement("a");
-      a.href = dataUrl;
-      a.download = "screenshot.png";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-    overlay.appendChild(downloadButton);
+// Add a download button to the overlay
+const downloadButton = document.createElement("button");
+downloadButton.style.border = "none";
+downloadButton.style.background = "transparent";
+downloadButton.style.position = "absolute";
+downloadButton.style.width = "10%";
+downloadButton.style.height = "5%";
+downloadButton.style.top = "79%";
+downloadButton.style.left = "31%";
+downloadButton.style.backgroundImage = 'url("download.png")';
+downloadButton.style.backgroundSize = "cover";
+downloadButton.style.backgroundRepeat = "no-repeat";
+downloadButton.addEventListener("click", () => {
+  const canvas = document.createElement("canvas");
+  canvas.width = screenshotImage.width; // Change this to the desired width
+  canvas.height = screenshotImage.height; // Change this to the desired height
+  const context = canvas.getContext("2d");
+  context.drawImage(screenshotImage, 0, 0, screenshotImage.width, screenshotImage.height);
+  const dataUrl = canvas.toDataURL("image/png");
+  const a = document.createElement("a");
+  a.href = dataUrl;
+  a.download = "screenshot.png";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+});
+overlay.appendChild(downloadButton);
 
-    // Add a share button to the overlay
-    const shareButton = document.createElement("button");
-    shareButton.style.border = "none";
-    shareButton.style.background = "transparent";
-    shareButton.style.position = "absolute";
-    shareButton.style.width = "10%";
-    shareButton.style.height = "5%";
-    shareButton.style.top = "79%";
-    shareButton.style.left = "11%";
-    shareButton.style.backgroundImage = 'url("sharebtn.png")'; // Set the path to your background image
-    shareButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
-    shareButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
-    shareButton.addEventListener("click", async () => {
-      try {
-          // Check if the Web Share API is supported
-          if (navigator.share) {
-              const canvas = document.createElement("canvas");
-              canvas.width = 1080;
-              canvas.height = 1920;
-              const context = canvas.getContext("2d");
-              context.drawImage(screenshotImage, 0, 0, 1080, 1920);
-  
-              // Convert canvas to blob
-              canvas.toBlob(async (blob) => {
-                  const shareData = {
-                      title: "Check out my screenshot!",
-                      files: [new File([blob], "screenshot.png", { type: "image/png" })],
-                  };
-  
-                  // Use the Web Share API to share the image
-                  await navigator.share(shareData);
-              }, "image/png");
-          } else {
-              // Web Share API not supported, provide fallback or inform the user
-              console.log("Web Share API not supported");
-          }
-      } catch (error) {
-          console.error("Error sharing screenshot:", error);
+// Add a share button to the overlay
+const shareButton = document.createElement("button");
+shareButton.style.border = "none";
+shareButton.style.background = "transparent";
+shareButton.style.position = "absolute";
+shareButton.style.width = "10%";
+shareButton.style.height = "5%";
+shareButton.style.top = "79%";
+shareButton.style.left = "11%";
+shareButton.style.backgroundImage = 'url("sharebtn.png")';
+shareButton.style.backgroundSize = "cover";
+shareButton.style.backgroundRepeat = "no-repeat";
+shareButton.addEventListener("click", async () => {
+  try {
+      // Check if the Web Share API is supported
+      if (navigator.share) {
+          const canvas = document.createElement("canvas");
+
+          // Use the original size of the screenshot image
+          canvas.width = screenshotImage.width;
+          canvas.height = screenshotImage.height;
+
+          const context = canvas.getContext("2d");
+          context.drawImage(screenshotImage, 0, 0, screenshotImage.width, screenshotImage.height);
+
+          // Convert canvas to blob
+          canvas.toBlob(async (blob) => {
+              const shareData = {
+                  title: "Check out my screenshot!",
+                  files: [new File([blob], "screenshot.png", { type: "image/png" })],
+              };
+
+              // Use the Web Share API to share the image
+              await navigator.share(shareData);
+          }, "image/png");
+      } else {
+          // Web Share API not supported, provide fallback or inform the user
+          console.log("Web Share API not supported");
       }
-  });
-    overlay.appendChild(shareButton);
+  } catch (error) {
+      console.error("Error sharing screenshot:", error);
+  }
+});
+
+overlay.appendChild(shareButton);
 
     // Add a close button to the overlay
     const closeButton = document.createElement("button");
@@ -162,9 +186,9 @@ const onScreenshotButtonClick = async (e) => {
     closeButton.style.height = "7%";
     closeButton.style.top = "8%";
     closeButton.style.left = "10%";
-    closeButton.style.backgroundImage = 'url("closebtn.png")'; // Set the path to your background image
-    closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
-    closeButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+    closeButton.style.backgroundImage = 'url("closebtn.png")';
+    closeButton.style.backgroundSize = "cover";
+    closeButton.style.backgroundRepeat = "no-repeat";
     closeButton.addEventListener("click", () => {
       screenshotButton.style.display = "block";
       overlay.style.display = "none";
@@ -176,7 +200,6 @@ const onScreenshotButtonClick = async (e) => {
   }
 };
 
-
 const onRecButtonClick = async () => {
   if (!!isRecording) {
     recButton.src = "assets/icons/controls/icon-record.svg";
@@ -187,7 +210,7 @@ const onRecButtonClick = async () => {
     const popup = document.createElement("div");
 
     popup.classList.add("popup", "popup__hidden");
-    popup.innerHTML = `<span class="popup__bold">Video is ready</span> Check the <span id="rec-link"><a href="${url}" target="_blank">link</a</span>`;
+    popup.innerHTML = `<span class="popup__bold">Video is ready</span> Check the <span id="rec-link"><a href="${url}" target="_blank">link</a></span>`;
     popups.prepend(popup);
 
     setTimeout(() => {
