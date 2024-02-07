@@ -145,20 +145,34 @@ shareButton.style.backgroundSize = "cover";
 shareButton.style.backgroundRepeat = "no-repeat";
 shareButton.addEventListener("click", async () => {
   try {
+    // Check if the Web Share API is supported
     if (navigator.share) {
-      const shareData = {
-        title: "Check out my screenshot!",
-        text: "This is an amazing screenshot!",
-        url: screenshotImage.src,
-      };
+        const canvas = document.createElement("canvas");
 
-      await navigator.share(shareData);
+        // Use the original size of the screenshot image
+        canvas.width = screenshotImage.width;
+        canvas.height = screenshotImage.height;
+
+        const context = canvas.getContext("2d");
+        context.drawImage(screenshotImage, 0, 0, screenshotImage.width, screenshotImage.height);
+
+        // Convert canvas to blob
+        canvas.toBlob(async (blob) => {
+            const shareData = {
+                title: "Check out my screenshot!",
+                files: [new File([blob], "screenshot.png", { type: "image/png" })],
+            };
+
+            // Use the Web Share API to share the image
+            await navigator.share(shareData);
+        }, "image/png");
     } else {
-      console.log("Web Share API not supported");
+        // Web Share API not supported, provide fallback or inform the user
+        console.log("Web Share API not supported");
     }
-  } catch (error) {
+} catch (error) {
     console.error("Error sharing screenshot:", error);
-  }
+}
 });
 overlay.appendChild(shareButton);
 
