@@ -21,6 +21,7 @@ body, html {
 #shareButton,
 #downloadButton,
 #closeButton {
+  display: none;
     z-index: 5;
     position: fixed;
    
