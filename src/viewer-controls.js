@@ -43,10 +43,10 @@ const onScreenshotButtonClick = async (e) => {
       overlay.id = "overlay";
       overlay.style.display = "none";
       overlay.style.position = "fixed"; // Fixed position to overlay the entire screen
-      overlay.style.top = "73px";
-      overlay.style.left = "29px";
-      overlay.style.width = "88vw";
-      overlay.style.height = "62vh";
+      overlay.style.top = "0px";
+      overlay.style.left = "0px";
+      overlay.style.width = "100vw";
+      overlay.style.height = "100vh";
       // overlay.style.backgroundImage = 'url("Photo_frame.png")';
       // overlay.style.backgroundSize = "cover";
       overlay.style.background = "transparent"; 
@@ -74,18 +74,18 @@ screenshotImage.id = "photo";
 
 // Set the position and percentage-based size of the screenshot image in the overlay
 screenshotImage.style.position = "fixed";
-screenshotImage.style.top = "18%";
-screenshotImage.style.left = "16%";
-screenshotImage.style.width = "70%";  // Use a percentage for width
+screenshotImage.style.top = "29%";
+screenshotImage.style.left = "17%";
+screenshotImage.style.width = "69%";  // Use a percentage for width
 screenshotImage.style.height = "auto";  // Let the height adjust proportionally
 
 // Append the screenshot image to the overlay
 overlay.appendChild(screenshotImage);
 const backgroundDiv = document.createElement("div");
 backgroundDiv.style.position = "absolute";
-backgroundDiv.style.top = "-11px";
-backgroundDiv.style.left = "-81px";
-backgroundDiv.style.width = "126%";
+backgroundDiv.style.top = "-0px";
+backgroundDiv.style.left = "0px";
+backgroundDiv.style.width = "100%";
 backgroundDiv.style.height = "100%";
 backgroundDiv.style.backgroundImage = 'url("Photo_frame.png")';
 backgroundDiv.style.backgroundSize = "cover";
