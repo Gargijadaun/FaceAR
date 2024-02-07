@@ -813,7 +813,7 @@ input[name="effect"]:checked + .effect-icon__border {
  
   /* Add more adjustments for other elements as needed */
 }
-@media screen and (min-width: 600px) and (orientation: portrait) {
+@media screen and (min-width: 594px) and (orientation: portrait) {
 
  .controls {
     position: absolute;
