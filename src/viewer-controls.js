@@ -27,6 +27,10 @@ const onMuteButtonClick = () => {
 };
 
 const onScreenshotButtonClick = async (e) => {
+  let overlay = document.getElementById("overlay");
+  let downloadButton = document.getElementById("downloadButton");
+  let shareButton = document.getElementById("shareButton");
+  let closeButton = document.getElementById("closeButton");
   if (e.type === "mousedown") {
     screenshotButton.src = "assets/icons/controls/capture.png";
   } else {
@@ -34,9 +38,11 @@ const onScreenshotButtonClick = async (e) => {
     const screenshotBlob = await getScreenshot();
     const url = URL.createObjectURL(screenshotBlob);
     screenshotButton.style.display = "none";
-
+    downloadButton.style.display = "block";
+    shareButton.style.display = "block";
+    closeButton.style.display = "block";
     // Create or retrieve the existing overlay
-    let overlay = document.getElementById("overlay");
+   
     if (!overlay) {
       // Create an overlay element
       overlay = document.createElement("div");
@@ -92,17 +98,17 @@ backgroundDiv.style.backgroundSize = "cover";
 backgroundDiv.style.backgroundRepeat = "no-repeat";
 overlay.appendChild(backgroundDiv);
     // Add a download button to the overlay
-    const downloadButton = document.createElement("button");
-    downloadButton.style.border = "none";
-    downloadButton.style.background = "transparent";
-    downloadButton.style.position = "absolute";
-    downloadButton.style.width = "8%";
-    downloadButton.style.height = "7%";
-    downloadButton.style.top = "100%";
-    downloadButton.style.left = "31%";
-    downloadButton.style.backgroundImage = 'url("download.png")'; // Set the path to your background image
-    downloadButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
-    downloadButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+    // const downloadButton = document.createElement("button");
+    // downloadButton.style.border = "none";
+    // downloadButton.style.background = "transparent";
+    // downloadButton.style.position = "absolute";
+    // downloadButton.style.width = "8%";
+    // downloadButton.style.height = "7%";
+    // downloadButton.style.top = "100%";
+    // downloadButton.style.left = "31%";
+    // downloadButton.style.backgroundImage = 'url("download.png")'; // Set the path to your background image
+    // downloadButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    // downloadButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
    
 downloadButton.addEventListener("click", async () => {
   try {
@@ -118,20 +124,20 @@ downloadButton.addEventListener("click", async () => {
     console.error("Error capturing overlay:", error);
   }
 });
-    overlay.appendChild(downloadButton);
+    // overlay.appendChild(downloadButton);
 
     // Add a share button to the overlay
-    const shareButton = document.createElement("button");
-    shareButton.style.border = "none";
-    shareButton.style.background = "transparent";
-    shareButton.style.position = "absolute";
-    shareButton.style.width = "8%";
-    shareButton.style.height = "7%";
-    shareButton.style.top = "100%";
-    shareButton.style.left = "11%";
-    shareButton.style.backgroundImage = 'url("sharebtn.png")'; // Set the path to your background image
-    shareButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
-    shareButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+    // const shareButton = document.createElement("button");
+    // shareButton.style.border = "none";
+    // shareButton.style.background = "transparent";
+    // shareButton.style.position = "absolute";
+    // shareButton.style.width = "8%";
+    // shareButton.style.height = "7%";
+    // shareButton.style.top = "100%";
+    // shareButton.style.left = "11%";
+    // shareButton.style.backgroundImage = 'url("sharebtn.png")'; // Set the path to your background image
+    // shareButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    // shareButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
     shareButton.addEventListener("click", async () => {
       try {
         // Check if the Web Share API is supported
@@ -164,25 +170,25 @@ downloadButton.addEventListener("click", async () => {
       }
     });
     
-    overlay.appendChild(shareButton);
+    // overlay.appendChild(shareButton);
 
     // Add a close button to the overlay
-    const closeButton = document.createElement("button");
-    closeButton.style.border = "none";
-    closeButton.style.background = "transparent";
-    closeButton.style.position = "absolute";
-    closeButton.style.width = "8%";
-    closeButton.style.height = "7%";
-    closeButton.style.top = "-9%";
-    closeButton.style.left = "87%";
-    closeButton.style.backgroundImage = 'url("closebtn.png")'; // Set the path to your background image
-    closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
-    closeButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
+    // const closeButton = document.createElement("button");
+    // closeButton.style.border = "none";
+    // closeButton.style.background = "transparent";
+    // closeButton.style.position = "absolute";
+    // closeButton.style.width = "8%";
+    // closeButton.style.height = "7%";
+    // closeButton.style.top = "-9%";
+    // closeButton.style.left = "87%";
+    // closeButton.style.backgroundImage = 'url("closebtn.png")'; // Set the path to your background image
+    // closeButton.style.backgroundSize = "cover"; // Ensure the background image covers the entire overlay
+    // closeButton.style.backgroundRepeat = "no-repeat"; // Prevent background image from repeating
     closeButton.addEventListener("click", () => {
       screenshotButton.style.display = "block";
       overlay.style.display = "none";
     });
-    overlay.appendChild(closeButton);
+    // overlay.appendChild(closeButton);
 
     // Show the overlay
     overlay.style.display = "block";

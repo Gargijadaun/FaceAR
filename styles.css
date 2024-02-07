@@ -6,6 +6,68 @@ body, html {
   margin: 0;
   padding: 0;
 }
+
+/* Add this CSS to your existing stylesheet or create a new one */
+
+/* Share Button */
+
+#shareButton:hover,
+#downloadButton:hover,
+#closeButton:hover {
+    background-color: #2980b9; /* Change the hover background color */
+}
+
+/* Center the buttons */
+#shareButton,
+#downloadButton,
+#closeButton {
+    z-index: 5;
+    position: fixed;
+   
+    transform: translate(-50%, -50%);
+}
+
+/* Set background image */
+#shareButton {
+  width: 76px;
+  height: 38px;
+  top: 73%;
+  left: 41%;
+    background: transparent;
+    border: none;
+    background-image: url('sharebtn.png'); /* Set the path to your share button image */
+    background-size: contain; /* Ensure the background image fits within the button */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+  ; /* Set a specific height */
+}
+
+#downloadButton {
+  width: 76px;
+  height: 38px;
+  top: 73%;
+  left: 21%;
+    background: transparent;
+    border: none;
+    background-image: url('download.png'); /* Set the path to your download button image */
+    background-size: contain; /* Ensure the background image fits within the button */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+
+}
+
+#closeButton {
+  width: 76px;
+    height: 38px;
+  top: 8%;
+  left: 88%;
+    background: transparent;
+    border: none;
+    background-image: url('closebtn.png'); /* Set the path to your close button image */
+    background-size: contain; /* Ensure the background image fits within the button */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+   
+}
+
+
 .overlay {
   position: fixed;
   top: 78px;
