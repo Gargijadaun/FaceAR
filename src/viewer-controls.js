@@ -73,20 +73,20 @@ screenshotImage.src = url;
 screenshotImage.id = "photo";
 
 // Set the position and percentage-based size of the screenshot image in the overlay
-screenshotImage.style.position = "absolute";
-screenshotImage.style.top = "8%";
-screenshotImage.style.left = "4%";
-screenshotImage.style.width = "90%";  // Use a percentage for width
+screenshotImage.style.position = "fixed";
+screenshotImage.style.top = "18%";
+screenshotImage.style.left = "16%";
+screenshotImage.style.width = "70%";  // Use a percentage for width
 screenshotImage.style.height = "auto";  // Let the height adjust proportionally
 
 // Append the screenshot image to the overlay
 overlay.appendChild(screenshotImage);
 const backgroundDiv = document.createElement("div");
 backgroundDiv.style.position = "absolute";
-backgroundDiv.style.top = "-44px";
-backgroundDiv.style.left = "-112px";
-backgroundDiv.style.width = "146%";
-backgroundDiv.style.height = "109%";
+backgroundDiv.style.top = "-11px";
+backgroundDiv.style.left = "-34px";
+backgroundDiv.style.width = "100%";
+backgroundDiv.style.height = "100%";
 backgroundDiv.style.backgroundImage = 'url("Photo_frame.png")';
 backgroundDiv.style.backgroundSize = "cover";
 backgroundDiv.style.backgroundRepeat = "no-repeat";
@@ -96,7 +96,7 @@ overlay.appendChild(backgroundDiv);
     downloadButton.style.border = "none";
     downloadButton.style.background = "transparent";
     downloadButton.style.position = "absolute";
-    downloadButton.style.width = "11%";
+    downloadButton.style.width = "8%";
     downloadButton.style.height = "7%";
     downloadButton.style.top = "100%";
     downloadButton.style.left = "31%";
@@ -125,7 +125,7 @@ downloadButton.addEventListener("click", async () => {
     shareButton.style.border = "none";
     shareButton.style.background = "transparent";
     shareButton.style.position = "absolute";
-    shareButton.style.width = "11%";
+    shareButton.style.width = "8%";
     shareButton.style.height = "7%";
     shareButton.style.top = "100%";
     shareButton.style.left = "11%";
@@ -171,7 +171,7 @@ downloadButton.addEventListener("click", async () => {
     closeButton.style.border = "none";
     closeButton.style.background = "transparent";
     closeButton.style.position = "absolute";
-    closeButton.style.width = "9%";
+    closeButton.style.width = "8%";
     closeButton.style.height = "7%";
     closeButton.style.top = "-9%";
     closeButton.style.left = "87%";
