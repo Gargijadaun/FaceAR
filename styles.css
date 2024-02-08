@@ -5,6 +5,7 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
+
 }
 
 /* Add this CSS to your existing stylesheet or create a new one */
@@ -107,6 +108,7 @@ body, html {
 
 main {
  
+
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -126,10 +128,12 @@ z-index: 2;
 }
 
 #webar {
-  
+  background-image: url('homebg.png'); /* Set the path to your share button image */
+  background-size: contain; /* Ensure the background image fits within the button */
+  background-repeat: no-repeat; /* Prevent background image from repeating */
   width: 100%;
   height: 100%;
-  background-color: #000000;
+  /* background-color: #000000; */
 }
 
 canvas {
@@ -231,7 +235,7 @@ canvas {
   height: 230px;
   flex-shrink: 0;
   border-radius: 20px;
-  background: #fff;
+  background: rgba(0, 51, 51, 1);
   top: calc(50% - 115px);
   left: calc(50% - 175px);
   text-align: center;
@@ -240,7 +244,7 @@ canvas {
 }
 
 .start-screen__title {
-  color: #191428;
+  color: white;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -253,7 +257,7 @@ canvas {
 }
 
 .start-screen__webcam label {
-  color: #fff;
+  color:#000000;
   font-size: 13px;
   font-style: normal;
   font-weight: 700;
@@ -261,7 +265,7 @@ canvas {
   text-transform: uppercase;
   border-radius: 20px;
   border: 1px solid #191428;
-  background: #191428;
+  background: rgba(231, 193, 109, 1);
   display: inline-block;
   width: 164px;
   padding: 12px 0;
@@ -279,7 +283,7 @@ canvas {
   text-transform: uppercase;
   border-radius: 20px;
   border: 1px solid #191428;
-  background: #fff;
+  background: rgba(231, 193, 109, 1);
   padding: 12px 0;
   cursor: pointer;
 }
@@ -789,7 +793,9 @@ input[name="effect"]:checked + .effect-icon__border {
   top: 56px;
   left: 12px;
 }
-
+#screenshot-button{
+  display: none;
+}
 @keyframes start-screen__spinner {
   0% {
     transform: rotate(0deg);
@@ -814,6 +820,8 @@ input[name="effect"]:checked + .effect-icon__border {
   /* Add more adjustments for other elements as needed */
 }
 @media screen and (min-width: 594px) and (orientation: portrait) {
+
+  
 
  .controls {
     position: absolute;

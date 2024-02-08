@@ -19,12 +19,21 @@ const onSourceSelect = () => {
 };
 
 const onWebcamSelect = (e) => {
+  
+  let web = document.getElementById("webar");
+  let screenshot = document.getElementById("screenshot-button");
+  screenshot.style.display = "block";
+  web.style.backgroundImage = web.style.backgroundImage === "none" ? "url('homebg.png')" : "none";
   const source = getSource(e.target.value);
   startPlayer(source);
   onSourceSelect();
 };
 
 const onImageSelect = (e) => {
+  let web = document.getElementById("webar");
+  let screenshot = document.getElementById("screenshot-button");
+  screenshot.style.display = "block";
+  web.style.backgroundImage = web.style.backgroundImage === "none" ? "url('homebg.png')" : "none";
   const source = getSource(e.target.value, e.target.files[0]);
   startPlayer(source);
   onSourceSelect();
